@@ -846,3 +846,37 @@ for_loop3:
         goto for_loop3;
     }
 }
+
+void findrecibyingd(string ingd[], int noofingd)
+{
+    for (int i = 0; i < 26; i++) // traversing in food array in which we have sorted names by alphabet
+    {
+        dish *temp = storage[i].next;
+        while (temp != NULL) // traversing in linked list
+        {
+            bool foundallingd = true; // Initialize for each dish
+            for (int j = 0; j < noofingd; j++)
+            {
+                bool foundingd = false; // Initialize for each ingredient
+                for (int k = 0; k < 25; k++)
+                {
+                    if (ingd[j] == temp->arr[k].a)
+                    {
+                        foundingd = true;
+                        break;
+                    }
+                }
+                if (!foundingd)
+                {
+                    foundallingd = false;
+                    break;
+                }
+            }
+            if (foundallingd)
+            {
+                cout << temp->name << " : " << temp->recipe << endl;
+            }
+            temp = temp->next;
+        }
+    }
+}
